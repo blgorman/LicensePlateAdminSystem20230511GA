@@ -1,0 +1,75 @@
+﻿@model IEnumerable<LicensePlateDataModels.LicensePlate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<div id="successdiv" class="alert alert-success alert-dismissible fade show" role="alert">
+    License Plate successfully updated  
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<table id="plateTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IsProcessed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlateText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeStamp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsProcessed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicensePlateText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script>
+        $(function(){
+            $("#plateTable").DataTable();
+        });
+        
+        function notifyUserOfSuccess()
+        {
+            $("#successdiv").toggle();
+        }
+        
+    </script>
+    @if (ViewBag.JavaScriptFunction != null) {
+    <script type="text/javascript">
+        @Html.Raw(ViewBag.JavaScriptFunction)
+    </script>
+    }
+}

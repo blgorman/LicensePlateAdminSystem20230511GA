@@ -1,0 +1,32 @@
+﻿@model LicensePlateDataModels.LicensePlateQueueMessageData
+
+@{
+    ViewData["Title"] = "Review Plate";
+}
+
+<h1>Next Plate: @Model.LicensePlateText</h1>
+
+<form asp-action="UpdateCosmos">
+    <div class="row">
+        <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-md-3">@Html.DisplayNameFor(model => model.LicensePlateText)</dt>
+            <dd class="col-md-9">@Html.EditorFor(model => model.LicensePlateText)</dd>
+            <dt class="col-md-3">@Html.DisplayNameFor(model => model.FileName)</dt>
+            <dd class="col-md-9" style="word-wrap: break-word;">@Html.DisplayFor(model => model.FileName)</dd>
+            <dt class="col-md-3">@Html.DisplayNameFor(model => model.TimeStamp)</dt>
+            <dd class="col-md-9" style="word-wrap: break-word;">@Html.DisplayFor(model => model.TimeStamp)</dd>
+        </dl>
+    </div>
+        <div class="col-md-6">
+            <img src="@ViewBag.ImageURL" alt="the plate image" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.HiddenFor(model => model.FileName)  
+            @Html.HiddenFor(model => model.TimeStamp)
+            <input type="submit" value="Confirm Plate" class="btn btn-danger" />
+        </div>
+    </div>
+</form>
